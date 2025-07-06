@@ -1,0 +1,232 @@
+name: ? Bug Report
+description: Report a bug or issue with DCBEV
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the information below to help us resolve the issue quickly.
+        
+        ? **Security Notice**: If this is a security vulnerability, please report it privately to security@dcbev.com instead of creating a public issue.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please check all applicable items before submitting
+      options:
+        - label: I have searched existing issues to ensure this hasn't been reported before
+          required: true
+        - label: I have reproduced this issue on the latest version
+          required: true
+        - label: I am not reporting a security vulnerability (use security@dcbev.com for that)
+          required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: DCBEV Version
+      description: Which version of DCBEV are you using?
+      placeholder: "e.g., v1.0.0, main branch commit hash"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected?
+      options:
+        - Android App
+        - Backend API
+        - Admin Portal
+        - Database
+        - Authentication
+        - AI/Chat Functionality
+        - DealersCloud Integration
+        - Other/Unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this issue?
+      options:
+        - Critical - System completely unusable
+        - High - Major functionality broken
+        - Medium - Minor functionality issues
+        - Low - Cosmetic or minor issues
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+      placeholder: Describe the issue you're experiencing...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+      placeholder: Describe what should have happened...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened instead
+      placeholder: Describe what actually happened...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Which platform are you using?
+      options:
+        - Android (Phone)
+        - Android (Tablet)
+        - Web Browser
+        - API/Backend
+        - Multiple Platforms
+    validations:
+      required: true
+
+  - type: input
+    id: android_version
+    attributes:
+      label: Android Version (if applicable)
+      description: What version of Android are you using?
+      placeholder: "e.g., Android 13, API level 33"
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser (if applicable)
+      description: Which browser and version are you using?
+      placeholder: "e.g., Chrome 120, Firefox 119, Safari 17"
+
+  - type: input
+    id: device
+    attributes:
+      label: Device Information
+      description: What device are you using?
+      placeholder: "e.g., Samsung Galaxy S23, iPhone 15 Pro, Emulator"
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Additional environment information
+      placeholder: |
+        - Backend URL: 
+        - Authentication method: 
+        - Network conditions: 
+        - Any other relevant details...
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs
+      description: Any relevant error messages or logs
+      placeholder: |
+        Please paste any error messages, stack traces, or relevant log entries here.
+        
+        For Android: Use `adb logcat` or Android Studio logcat
+        For Backend: Check server logs
+        For Web: Check browser console (F12)
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots/Videos
+      description: Add screenshots or videos to help explain the problem
+      placeholder: |
+        You can attach images by dragging and dropping them here.
+        For videos, consider uploading to a service like YouTube or Loom and sharing the link.
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Any temporary workaround you've found
+      placeholder: If you've found a way to work around this issue, please describe it here...
+
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Regression
+      description: Is this a regression (worked before, now broken)?
+      options:
+        - "Yes - this worked in a previous version"
+        - "No - this never worked"
+        - "Unknown"
+
+  - type: input
+    id: last_working_version
+    attributes:
+      label: Last Working Version (if regression)
+      description: What was the last version where this worked?
+      placeholder: "e.g., v0.9.5"
+
+  - type: dropdown
+    id: business_impact
+    attributes:
+      label: Business Impact
+      description: How does this affect dealership operations?
+      options:
+        - Blocking - Cannot perform critical dealership functions
+        - High - Significantly impacts daily operations
+        - Medium - Minor impact on operations
+        - Low - Minimal impact
+        - Unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Any other information that might be relevant
+      placeholder: |
+        - Related issues
+        - Frequency of occurrence
+        - Customer impact
+        - Any other relevant information...
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Are you willing to help fix this issue?
+      options:
+        - label: I am willing to submit a pull request to fix this issue
+        - label: I can help with testing the fix
+        - label: I can provide additional information if needed
