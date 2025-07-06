@@ -1,0 +1,119 @@
+# Multi-stage Dockerfile for DCBEV Backend
+# Optimized for production with security and performance considerations
+
+# =============================================================================
+# Stage 1: Base Python Image
+# =============================================================================
+FROM python:3.9-slim as base
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libpq-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user for security
+RUN groupadd -r dcbev && useradd -r -g dcbev dcbev
+
+# =============================================================================
+# Stage 2: Dependencies Installation
+# =============================================================================
+FROM base as dependencies
+
+# Set work directory
+WORKDIR /app
+
+# Copy requirements files
+COPY requirements.txt requirements-dev.txt ./
+
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# =============================================================================
+# Stage 3: Development Stage
+# =============================================================================
+FROM dependencies as development
+
+# Install development dependencies
+RUN pip install -r requirements-dev.txt
+
+# Copy application code
+COPY . .
+
+# Change ownership to dcbev user
+RUN chown -R dcbev:dcbev /app
+
+# Switch to non-root user
+USER dcbev
+
+# Expose port
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Start command for development
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+# =============================================================================
+# Stage 4: Production Stage
+# =============================================================================
+FROM dependencies as production
+
+# Install additional production tools
+RUN pip install gunicorn
+
+# Copy application code
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p /app/logs /app/uploads && \
+    chown -R dcbev:dcbev /app
+
+# Switch to non-root user
+USER dcbev
+
+# Expose port
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Start command for production
+CMD ["gunicorn", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "--access-logfile", "-", "--error-logfile", "-"]
+
+# =============================================================================
+# Stage 5: Testing Stage
+# =============================================================================
+FROM development as testing
+
+# Copy test files
+COPY tests/ ./tests/
+
+# Run tests
+RUN python -m pytest tests/ -v --cov=./ --cov-report=term-missing
+
+# =============================================================================
+# Labels for container metadata
+# =============================================================================
+LABEL maintainer="DCBEV Team <team@dcbev.com>" \
+      version="1.0.0" \
+      description="DCBEV Backend API - FastAPI application for automotive dealership AI assistant" \
+      org.opencontainers.image.title="DCBEV Backend" \
+      org.opencontainers.image.description="FastAPI backend for DCBEV automotive AI assistant" \
+      org.opencontainers.image.version="1.0.0" \
+      org.opencontainers.image.vendor="DCBEV" \
+      org.opencontainers.image.url="https://github.com/ammanabbasi/DCBEV" \
+      org.opencontainers.image.documentation="https://github.com/ammanabbasi/DCBEV/blob/main/README.md" \
+      org.opencontainers.image.source="https://github.com/ammanabbasi/DCBEV"
