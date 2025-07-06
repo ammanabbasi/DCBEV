@@ -1,0 +1,293 @@
+name: ? Feature Request
+description: Suggest a new feature or enhancement for DCBEV
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide detailed information to help us understand and prioritize your request.
+        
+        ? **Note**: For urgent business requirements, please also reach out to our team directly.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please check all applicable items before submitting
+      options:
+        - label: I have searched existing issues and discussions to ensure this hasn't been requested before
+          required: true
+        - label: I have considered whether this could be implemented as a plugin or extension
+          required: true
+        - label: This feature aligns with DCBEV's mission of AI-powered dealership assistance
+          required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: Which category does this feature belong to?
+      options:
+        - Chat/AI Functionality
+        - Android UI/UX
+        - Backend API
+        - Admin Portal
+        - DealersCloud Integration
+        - Authentication & Security
+        - Performance & Optimization
+        - Analytics & Reporting
+        - Mobile Features
+        - Developer Experience
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Business Priority
+      description: How important is this feature for dealership operations?
+      options:
+        - Critical - Essential for core dealership functions
+        - High - Significantly improves dealership efficiency
+        - Medium - Nice to have, improves user experience
+        - Low - Minor improvement or edge case
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: |
+        Describe the current pain point or limitation that this feature would address.
+        Be specific about how it affects dealership operations or user experience.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your proposed feature in detail
+      placeholder: |
+        Provide a clear and detailed description of what you want to happen.
+        Include how users would interact with this feature.
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_story
+    attributes:
+      label: User Story
+      description: Describe this feature from a user's perspective
+      placeholder: |
+        As a [type of user], I want [goal] so that [benefit].
+        
+        Example:
+        As a dealership manager, I want to receive daily AI-generated inventory reports 
+        so that I can make data-driven decisions about pricing and procurement.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user_type
+    attributes:
+      label: Primary User Type
+      description: Who would primarily use this feature?
+      options:
+        - Dealership Manager/Owner
+        - Sales Representative
+        - Finance Manager
+        - Service Advisor
+        - Customer
+        - System Administrator
+        - Developer/Integrator
+        - Multiple User Types
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What defines "done" for this feature?
+      placeholder: |
+        List specific, measurable criteria that must be met for this feature to be considered complete.
+        
+        Example:
+        - [ ] Users can ask "Show me my inventory aging report"
+        - [ ] AI responds with formatted table of vehicles by age
+        - [ ] Report includes actionable recommendations
+        - [ ] Data updates in real-time from DealersCloud
+    validations:
+      required: true
+
+  - type: textarea
+    id: business_value
+    attributes:
+      label: Business Value
+      description: What business value does this feature provide?
+      placeholder: |
+        Explain the business impact and ROI. Consider:
+        - Time savings
+        - Revenue impact
+        - Customer satisfaction
+        - Operational efficiency
+        - Competitive advantage
+    validations:
+      required: true
+
+  - type: input
+    id: target_users
+    attributes:
+      label: Target User Count
+      description: How many users would benefit from this feature?
+      placeholder: "e.g., 500+ dealership staff, 10,000+ customers"
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative approaches?
+      placeholder: |
+        Describe any other ways this problem could be solved.
+        Why is your proposed solution better?
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Implementation Complexity (Estimate)
+      description: How complex do you think this feature would be to implement?
+      options:
+        - Simple - Few days of development
+        - Medium - 1-2 weeks of development
+        - Complex - 3-4 weeks of development
+        - Very Complex - Multiple months
+        - Unknown
+
+  - type: checkboxes
+    id: components
+    attributes:
+      label: Affected Components
+      description: Which parts of DCBEV would need to be modified?
+      options:
+        - label: Android App UI
+        - label: Android App Logic
+        - label: Backend API
+        - label: Database Schema
+        - label: AI/OpenAI Integration
+        - label: DealersCloud Integration
+        - label: Authentication System
+        - label: Admin Portal
+        - label: Documentation
+        - label: Testing Framework
+
+  - type: textarea
+    id: technical_considerations
+    attributes:
+      label: Technical Considerations
+      description: Any technical details, constraints, or considerations
+      placeholder: |
+        - Performance requirements
+        - Security considerations
+        - Integration requirements
+        - Scalability needs
+        - Platform compatibility
+
+  - type: textarea
+    id: ui_mockup
+    attributes:
+      label: UI/UX Mockup or Description
+      description: How should this feature look and feel?
+      placeholder: |
+        Describe the user interface or attach mockups/wireframes.
+        Consider the ChatGPT-like design principles of DCBEV.
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples and Use Cases
+      description: Provide specific examples of how this feature would be used
+      placeholder: |
+        Example 1: A sales manager asks "What's my team's performance this month?"
+        The AI responds with a formatted report showing individual and team metrics.
+        
+        Example 2: A customer asks "Do you have any red sedans under $25k?"
+        The AI searches inventory and provides matching vehicles with photos.
+
+  - type: dropdown
+    id: integration_required
+    attributes:
+      label: External Integration Required
+      description: Does this feature require integration with external services?
+      options:
+        - No external integration needed
+        - DealersCloud API enhancement
+        - OpenAI API changes
+        - Firebase services
+        - New third-party service
+        - Multiple integrations
+
+  - type: textarea
+    id: data_requirements
+    attributes:
+      label: Data Requirements
+      description: What data would this feature need to access or store?
+      placeholder: |
+        - New data fields
+        - External data sources
+        - Data privacy considerations
+        - Data retention requirements
+
+  - type: dropdown
+    id: release_target
+    attributes:
+      label: Desired Release Target
+      description: When would you like to see this feature released?
+      options:
+        - Next patch (urgent)
+        - Next minor release (1-2 months)
+        - Next major release (3-6 months)
+        - Future consideration (6+ months)
+        - No specific timeline
+
+  - type: textarea
+    id: success_metrics
+    attributes:
+      label: Success Metrics
+      description: How would we measure the success of this feature?
+      placeholder: |
+        - User adoption rate
+        - Time savings
+        - Customer satisfaction scores
+        - Usage frequency
+        - Business KPIs affected
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: How can you contribute to this feature?
+      options:
+        - label: I can help with design and specifications
+        - label: I can provide testing and feedback
+        - label: I can help with development
+        - label: I can provide business requirements
+        - label: I can help with documentation
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Any other information that would be helpful
+      placeholder: |
+        - Related features or issues
+        - Industry standards or compliance requirements
+        - Customer feedback or requests
+        - Market research or competitive analysis
+        - Any other relevant information
