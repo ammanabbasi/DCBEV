@@ -1,0 +1,20 @@
+# Local Development Configuration Template
+# Copy this file to local.properties and fill in your actual values
+# NEVER commit local.properties to version control
+
+# Android SDK location (auto-generated, do not modify)
+sdk.dir=/path/to/android/sdk
+
+# DealersCloud API Configuration
+DC_BASE_URL=https://yahauto.autodealerscloud.com
+DC_API_BEARER=your_api_bearer_token_here
+
+# Admin Credentials (Required for DealersCloud access)
+DC_ADMIN_USERNAME=your_admin_username
+DC_ADMIN_PASSWORD=your_admin_password
+
+# OpenAI API Key (for AI features)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Firebase Cloud Messaging
+FCM_SERVER_KEY=your_fcm_server_key_here
